@@ -1,5 +1,15 @@
 # @assistant-ui/react-data-stream
 
+## 0.12.41
+
+### Patch Changes
+
+- [#10167](https://github.com/assistant-ui/assistant-ui/pull/10167) [`8c1a048`](https://github.com/assistant-ui/assistant-ui/commit/8c1a048d478f2c7944193d05bd777cd83c5a330c) - `UIMessageStreamDecoder` decodes the AI SDK's tool approval chunks: a `tool-approval-request` puts `approval` on its tool call, keeping the server's fields (`signature` among them) verbatim, and an automatic denial settles the call. The decoder also opens the first step of a UI message stream once instead of twice, so a run that needs a second roundtrip (a frontend tool result or an approval decision) is no longer stopped by `maxSteps`. `DataStreamEncoder` and `DataStreamDecoder` carry an approval set with `setApproval` in a new `aui-tool-call-approval` frame. `useCloudRuntime` sends a denied call without the error result `LocalRuntime` records for it, so a server using the AI SDK's tool approval answers it with an execution-denied result. `useDataStreamRuntime` sends the decision back in the AI SDK's own message layout: a `tool-approval-request` part after the gated call, a `tool-approval-response` part in the tool message, and an execution-denied result for a denied call. ([@bnb](https://github.com/bnb))
+- Updated dependencies [[`7129a47`](https://github.com/assistant-ui/assistant-ui/commit/7129a47e00a0177d6dec9a62f16e1a33c2d99c9d), [`becf077`](https://github.com/assistant-ui/assistant-ui/commit/becf0772bbb53f9a1f03b23b7eee15401c6380a9), [`154299c`](https://github.com/assistant-ui/assistant-ui/commit/154299cac40d59ffa2a35f4121e2a584d6f79f5e), [`f8da439`](https://github.com/assistant-ui/assistant-ui/commit/f8da439defda5e2c10453718f4455a9a2d787af2), [`0188f05`](https://github.com/assistant-ui/assistant-ui/commit/0188f0597a0ff7e0d65a63472efc98197dd46736), [`8c1a048`](https://github.com/assistant-ui/assistant-ui/commit/8c1a048d478f2c7944193d05bd777cd83c5a330c), [`e12509b`](https://github.com/assistant-ui/assistant-ui/commit/e12509bde082f37562a5e575384b085a266a85e9), [`d13fa6c`](https://github.com/assistant-ui/assistant-ui/commit/d13fa6cba63829f5290a01d0e12169f66fafdf9e), [`73704c0`](https://github.com/assistant-ui/assistant-ui/commit/73704c0cceb31fb744a872660824eab11416b481), [`26cde12`](https://github.com/assistant-ui/assistant-ui/commit/26cde127d6993bac8f10967b2c70f320e02213fe), [`78e2ea8`](https://github.com/assistant-ui/assistant-ui/commit/78e2ea8b02f643d1345b1444728b9484e6a333fa), [`8c1a048`](https://github.com/assistant-ui/assistant-ui/commit/8c1a048d478f2c7944193d05bd777cd83c5a330c), [`2dc77cf`](https://github.com/assistant-ui/assistant-ui/commit/2dc77cf77810d7d512783323989b2f2c345e032b)]:
+  - assistant-stream@0.3.56
+  - @assistant-ui/core@0.3.33
+  - assistant-cloud@0.2.10
+
 ## 0.12.40
 
 ### Patch Changes

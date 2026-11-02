@@ -1,5 +1,15 @@
 # @assistant-ui/store
 
+## 0.3.23
+
+### Patch Changes
+
+- [#10214](https://github.com/assistant-ui/assistant-ui/pull/10214) [`ca50ff7`](https://github.com/assistant-ui/assistant-ui/commit/ca50ff7a05f976b76abf3140058f7b9027769dd5) - Preserve thread viewport auto-scroll when a resize clamps the scroll position. ([@rupic-app](https://github.com/apps/rupic-app))
+
+- [#10266](https://github.com/assistant-ui/assistant-ui/pull/10266) [`5829349`](https://github.com/assistant-ui/assistant-ui/commit/5829349a8cbca2b017c3af7e0b70bf90cd47a44c) - clear completed bottom-scroll requests when the viewport is already pinned so later content growth respects `autoScroll={false}`. ([@okisdev](https://github.com/okisdev))
+  
+  preserve upward reader scrolling when the viewport resizes in the same frame.
+
 ## 0.3.22
 
 ### Patch Changes

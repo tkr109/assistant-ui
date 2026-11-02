@@ -1,5 +1,19 @@
 # assistant-stream
 
+## 0.3.56
+
+### Patch Changes
+
+- [#10212](https://github.com/assistant-ui/assistant-ui/pull/10212) [`7129a47`](https://github.com/assistant-ui/assistant-ui/commit/7129a47e00a0177d6dec9a62f16e1a33c2d99c9d) - Preserve part order when earlier stream chunks are already written. ([@rupic-app](https://github.com/apps/rupic-app))
+
+- [#10167](https://github.com/assistant-ui/assistant-ui/pull/10167) [`8c1a048`](https://github.com/assistant-ui/assistant-ui/commit/8c1a048d478f2c7944193d05bd777cd83c5a330c) - an approved AI SDK tool call now shows the result the server streams after the approval. `UIMessageStreamDecoder` passes on a `tool-output-available` or `tool-output-error` for a call an earlier response opened, and a `LocalRuntime` resume that yields a tool call the message holds without a result fills in that call instead of appending a second one. ([@bnb](https://github.com/bnb))
+  
+  when a continuation replaces a preliminary result, its model-facing content is replaced too, so later turns use the final result instead of stale progress text.
+
+- [#10200](https://github.com/assistant-ui/assistant-ui/pull/10200) [`d13fa6c`](https://github.com/assistant-ui/assistant-ui/commit/d13fa6cba63829f5290a01d0e12169f66fafdf9e) - Keep merged part paths aligned with emitted part-start order. ([@rupic-app](https://github.com/apps/rupic-app))
+
+- [#10167](https://github.com/assistant-ui/assistant-ui/pull/10167) [`8c1a048`](https://github.com/assistant-ui/assistant-ui/commit/8c1a048d478f2c7944193d05bd777cd83c5a330c) - `UIMessageStreamDecoder` decodes the AI SDK's tool approval chunks: a `tool-approval-request` puts `approval` on its tool call, keeping the server's fields (`signature` among them) verbatim, and an automatic denial settles the call. The decoder also opens the first step of a UI message stream once instead of twice, so a run that needs a second roundtrip (a frontend tool result or an approval decision) is no longer stopped by `maxSteps`. `DataStreamEncoder` and `DataStreamDecoder` carry an approval set with `setApproval` in a new `aui-tool-call-approval` frame. `useCloudRuntime` sends a denied call without the error result `LocalRuntime` records for it, so a server using the AI SDK's tool approval answers it with an execution-denied result. `useDataStreamRuntime` sends the decision back in the AI SDK's own message layout: a `tool-approval-request` part after the gated call, a `tool-approval-response` part in the tool message, and an execution-denied result for a denied call. ([@bnb](https://github.com/bnb))
+
 ## 0.3.55
 
 ### Patch Changes
